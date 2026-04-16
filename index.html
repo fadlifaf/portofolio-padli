@@ -1,0 +1,991 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portofolio Muhammad Padli - Layout Replica</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+
+      :root {
+        --primary: #1e3a8a;
+        --secondary: #3b82f6;
+        --accent: #60a5fa;
+        --bg-soft: #f1f5f9;
+      }
+
+      /* ================= BACKGROUND (ANTI FLAT) ================= */
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #eef2ff, #f8fafc);
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      /* blur decor */
+      body::before,
+      body::after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(90px);
+        z-index: 0;
+      }
+
+      body::before {
+        width: 350px;
+        height: 350px;
+        background: #3b82f6;
+        top: -100px;
+        left: -100px;
+        opacity: 0.25;
+      }
+
+      body::after {
+        width: 300px;
+        height: 300px;
+        background: #60a5fa;
+        bottom: -100px;
+        right: -100px;
+        opacity: 0.2;
+      }
+
+      /* biar konten di atas */
+      main {
+        position: relative;
+        z-index: 2;
+      }
+
+      /* ================= TOP LINE ================= */
+      .top-line {
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(to right, var(--primary), var(--secondary));
+        margin-bottom: 2rem;
+        border-radius: 10px;
+      }
+
+      /* ================= SECTION ================= */
+      section {
+        background: linear-gradient(145deg, #ffffff, #f1f5f9);
+        backdrop-filter: blur(10px);
+        padding: 24px;
+        border-radius: 18px;
+        box-shadow:
+          0 10px 25px rgba(0, 0, 0, 0.05),
+          inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        transition: all 0.3s ease;
+      }
+
+      section:hover {
+        transform: translateY(-4px);
+      }
+
+      /* ================= TITLE ================= */
+      h1,
+      h2 {
+        background: linear-gradient(to right, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* ================= PROFILE ================= */
+      figure {
+        transition: 0.4s;
+        overflow: hidden;
+      }
+
+      figure:hover {
+        transform: scale(1.05);
+      }
+
+      figure img {
+        transition: 0.4s;
+      }
+
+      /* ================= CARD ================= */
+      .shadow {
+        background: linear-gradient(145deg, #ffffff, #f8fafc);
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+      }
+
+      .shadow:hover {
+        box-shadow: 0 15px 30px rgba(30, 58, 138, 0.15);
+        transform: translateY(-3px);
+      }
+
+      /* ================= PROJECT ================= */
+      .project-hover {
+        transition: all 0.3s ease;
+      }
+
+      .project-hover:hover {
+        transform: translateY(-6px) scale(1.02);
+        box-shadow: 0 20px 30px rgba(30, 58, 138, 0.15);
+      }
+
+      /* ================= IMAGE ================= */
+      img {
+        border-radius: 12px;
+      }
+
+      /* ================= MODAL ================= */
+      #modal {
+        backdrop-filter: blur(6px);
+      }
+
+      /* ================= ANIMATION ================= */
+      .fade-in-section {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: 0.6s ease;
+      }
+
+      .fade-in-section.animate {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ================= SLIDER ================= */
+      .projects-slider {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .slider-track {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        gap: 2.5rem;
+      }
+
+      .slider-slide {
+        min-width: 100%;
+        flex-shrink: 0;
+      }
+
+      .slider-nav {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 2rem;
+      }
+
+      .slider-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(to right, var(--primary), var(--secondary));
+        color: white;
+        cursor: pointer;
+        transition: 0.3s;
+        border: none;
+      }
+
+      .slider-btn:hover {
+        transform: scale(1.1);
+      }
+
+      .slider-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #d1d5db;
+      }
+
+      .slider-dot.active {
+        background: var(--secondary);
+      }
+
+      @media (min-width: 768px) {
+        .slider-slide {
+          min-width: 50%;
+        }
+      }
+
+      /* ================= RESPONSIVE ================= */
+      @media (max-width: 768px) {
+        body {
+          padding: 16px;
+        }
+
+        h1 {
+          font-size: 22px;
+          text-align: center;
+        }
+
+        h2 {
+          font-size: 18px;
+        }
+
+        p {
+          font-size: 13px;
+        }
+
+        section {
+          padding: 18px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .grid {
+          gap: 16px !important;
+        }
+
+        img {
+          height: auto !important;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-white text-gray-900 antialiased p-6 md:p-12 lg:p-16">
+    <main class="max-w-5xl mx-auto">
+      <div class="top-line"></div>
+
+      <section
+        class="mb-16 grid grid-cols-1 md:grid-cols-[250px,1fr] gap-x-10 gap-y-6 items-start"
+      >
+        <figure
+          class="w-full aspect-square rounded-sm border border-gray-200 overflow-hidden"
+        >
+          <img
+            src="assets/PAS FOTO.png"
+            alt="Foto Profil Muhammad Padli"
+            class="w-full h-full object-cover object-[50%_20%]"
+          />
+          <figcaption class="sr-only">Foto Profil</figcaption>
+        </figure>
+        <div class="prose prose-sm max-w-none text-gray-800">
+          <h1 class="text-4xl font-bold uppercase tracking-tight mb-4 mt-0">
+            MUHAMMAD PADLI
+          </h1>
+          <p class="leading-relaxed text-justify">
+            Memiliki pengalaman lebih dari 1 tahun sebagai Network Operation
+            Center (NOC) sekaligus berperan sebagai IT Helpdesk, dengan tanggung
+            jawab dalam monitoring jaringan, penanganan gangguan, serta
+            troubleshooting sistem dan aplikasi POS. Terbiasa menangani incident
+            secara end-to-end dan memberikan dukungan teknis kepada pengguna.
+            Memiliki minat pada data analytics yang didukung dengan pelatihan
+            pengolahan dan visualisasi data menggunakan Power BI, Tableau, dan
+            Microsoft Excel. Juga tertarik pada keamanan jaringan dan website,
+            serta didukung kemampuan komunikasi, kerja tim, dan problem solving
+            yang baik.
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="pengalaman" class="fade-in-section mb-16">
+        <h2 class="text-2xl font-bold uppercase tracking-wide mb-6">
+          PENGALAMAN
+        </h2>
+
+        <!-- HEADER -->
+        <div
+          class="grid grid-cols-1 md:grid-cols-[1fr,auto] gap-8 items-start mb-8"
+        >
+          <div>
+            <h3 class="text-lg font-semibold uppercase">
+              PT. SURGANYA MOTOR INDONESIA (PLANET BAN)
+            </h3>
+            <p class="text-sm text-gray-600 mb-4">
+              BEBERAPA TANGGUNG JAWAB UTAMA MELIPUTI:
+            </p>
+          </div>
+
+          <div
+            class="w-40 h-16 bg-gray-100 rounded-sm border border-gray-200 overflow-hidden"
+          >
+            <img src="assets/PB.png" class="w-full h-full object-contain" />
+          </div>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- CARD 1 -->
+          <div
+            class="bg-white border border-gray-200 rounded-md overflow-hidden shadow-sm hover:shadow-md transition"
+          >
+            <div class="aspect-[4/3] overflow-hidden">
+              <img
+                src="assets/TIKET.JPG"
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+
+            <div class="p-4">
+              <p class="text-xs uppercase leading-relaxed text-justify">
+                MENANGANI TIKET GANGGUAN DENGAN REMOTE SUPPORT KE 8 CABANG UTAMA
+                YANG MENDUKUNG OPERASIONAL LEBIH DARI 1.000 TOKO, TERMASUK
+                TROUBLESHOOTING APLIKASI POS DAN JARINGAN SERTA ESKALASI UNTUK
+                MEMASTIKAN KELANCARAN OPERASIONAL.
+              </p>
+            </div>
+          </div>
+
+          <!-- CARD 2 -->
+          <div
+            class="bg-white border border-gray-200 rounded-md overflow-hidden shadow-sm hover:shadow-md transition"
+          >
+            <div class="aspect-[4/3] overflow-hidden">
+              <img
+                src="assets/MONITORING.JPG"
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+
+            <div class="p-4">
+              <p class="text-xs uppercase leading-relaxed text-justify">
+                MONITORING JARINGAN DAN SERVER SECARA REAL-TIME MENGGUNAKAN
+                GRAFANA, CACTI, UPTIME ROBOT, DAN CRONITOR DENGAN TARGET UPTIME
+                LAYANAN >99% SESUAI SLA, SERTA MERESPON ALERT SECARA CEPAT UNTUK
+                MEMINIMALKALKAN DOWNTIME.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="pendidikan" class="fade-in-section mb-16">
+        <h2 class="text-2xl font-bold uppercase tracking-wide mb-8">
+          PENDIDIKAN
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- CARD 1 -->
+          <div
+            class="bg-white border border-gray-200 rounded-md p-5 flex items-center gap-4 shadow-sm hover:shadow-md transition"
+          >
+            <!-- LOGO -->
+            <div
+              class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center border overflow-hidden shrink-0"
+            >
+              <img
+                src="assets/UG.PNG"
+                alt="Universitas Gunadarma"
+                class="w-10 h-10 object-contain"
+              />
+            </div>
+
+            <!-- TEXT -->
+            <div>
+              <h4 class="text-sm font-bold uppercase">Universitas Gunadarma</h4>
+              <p class="text-xs text-gray-600 leading-relaxed">
+                Sistem Informasi<br />
+                2020 - 2024
+              </p>
+              <p class="text-xs mt-1 text-gray-700">
+                Fokus pada analisis data, pemrograman, dan sistem informasi.
+              </p>
+            </div>
+          </div>
+
+          <!-- CARD 2 -->
+          <div
+            class="bg-white border border-gray-200 rounded-md p-5 flex items-center gap-4 shadow-sm hover:shadow-md transition"
+          >
+            <!-- LOGO -->
+            <div
+              class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center border overflow-hidden shrink-0"
+            >
+              <img
+                src="assets/MBKM.PNG"
+                alt="MSIB Data Analyst"
+                class="w-10 h-10 object-contain"
+              />
+            </div>
+
+            <!-- TEXT -->
+            <div>
+              <h4 class="text-sm font-bold uppercase">
+                MSIB - Data Analyst Academy
+              </h4>
+              <p class="text-xs text-gray-600 leading-relaxed">
+                Jan 2024 - Jun 2024
+              </p>
+              <p class="text-xs mt-1 text-gray-700">
+                Pelatihan analisis data menggunakan SQL, Python, dan Tableau.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- OPTIONAL LOGO BAWAH
+        <div class="flex justify-end mt-6">
+          <div
+            class="w-28 h-10 bg-gray-100 rounded border flex items-center justify-center overflow-hidden"
+          >
+            <img
+              src="assets/DATAACADEMY.PNG"
+              alt="Data Academy"
+              class="h-6 object-contain"
+            />
+          </div>
+        </div> -->
+      </section>
+      <section aria-labelledby="proyek" class="fade-in-section mb-16">
+        <h2 id="proyek" class="text-2xl font-bold uppercase tracking-wide mb-8">
+          PROYEK
+        </h2>
+
+        <div class="projects-slider overflow-hidden">
+          <div
+            class="slider-track flex transition-transform duration-500"
+            id="projectTrack"
+          >
+            <!-- Slide 1 -->
+            <div class="slider-slide min-w-full">
+              <a
+                href="https://link-project1.com"
+                target="_blank"
+                class="project-hover flex flex-col md:flex-row gap-6 items-center"
+              >
+                <div
+                  class="w-full md:w-1/2 h-56 md:h-72 bg-gray-200 rounded border overflow-hidden"
+                >
+                  <img
+                    src="assets/project1.jpg"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+
+                <div class="text-center md:text-left max-w-md">
+                  <h5 class="font-bold uppercase text-lg mb-2">Dashboard</h5>
+                  <p>Kualitas udara 2022 di dunia</p>
+                </div>
+              </a>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="slider-slide min-w-full">
+              <a
+                href="https://link-project2.com"
+                target="_blank"
+                class="project-hover flex flex-col md:flex-row gap-6 items-center"
+              >
+                <div
+                  class="w-full md:w-1/2 h-56 md:h-72 bg-gray-200 rounded border overflow-hidden"
+                >
+                  <img
+                    src="assets/project2.png"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+
+                <div class="text-center md:text-left max-w-md">
+                  <h5 class="font-bold uppercase text-lg mb-2">UI/UX</h5>
+                  <p>Desain pemesanan menu restoran</p>
+                </div>
+              </a>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="slider-slide min-w-full">
+              <a
+                href="https://link-project3.com"
+                target="_blank"
+                class="project-hover flex flex-col md:flex-row gap-6 items-center"
+              >
+                <div
+                  class="w-full md:w-1/2 h-56 md:h-72 bg-gray-200 rounded border overflow-hidden"
+                >
+                  <img
+                    src="assets/project3.png"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+
+                <div class="text-center md:text-left max-w-md">
+                  <h5 class="font-bold uppercase text-lg mb-2">Dashboard</h5>
+                  <p>Power BI penjualan game</p>
+                </div>
+              </a>
+            </div>
+
+            <!-- Slide 4 -->
+            <div class="slider-slide min-w-full">
+              <a
+                href="https://link-project4.com"
+                target="_blank"
+                class="project-hover flex flex-col md:flex-row gap-6 items-center"
+              >
+                <div
+                  class="w-full md:w-1/2 h-56 md:h-72 bg-gray-200 rounded border overflow-hidden"
+                >
+                  <img
+                    src="assets/project4.png"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+
+                <div class="text-center md:text-left max-w-md">
+                  <h5 class="font-bold uppercase text-lg mb-2">UI/UX</h5>
+                  <p>Desain pemesanan snack</p>
+                </div>
+              </a>
+            </div>
+
+            <!-- Slide 5 -->
+            <div class="slider-slide min-w-full">
+              <a
+                href="https://link-project5.com"
+                target="_blank"
+                class="project-hover flex flex-col md:flex-row gap-6 items-center"
+              >
+                <div
+                  class="w-full md:w-1/2 h-56 md:h-72 bg-gray-200 rounded border overflow-hidden"
+                >
+                  <img
+                    src="assets/project5.png"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+
+                <div class="text-center md:text-left max-w-md">
+                  <h5 class="font-bold uppercase text-lg mb-2">Aplikasi POS</h5>
+                  <p>Website POS CodeIgniter</p>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- NAV -->
+          <div class="flex justify-center items-center gap-4 mt-6">
+            <button id="prevBtn" class="slider-btn">❮</button>
+            <div id="projectDots" class="flex gap-2"></div>
+            <button id="nextBtn" class="slider-btn">❯</button>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="sertifikasi" class="fade-in-section mb-16">
+        <h2 class="text-2xl font-bold uppercase tracking-wide mb-4">
+          PELATIHAN DAN SERTIFIKASI
+        </h2>
+
+        <p class="text-sm text-gray-700 mb-8 max-w-xl">
+          Berikut adalah sertifikat yang saya peroleh selama mengikuti pelatihan
+          dan program pengembangan.
+        </p>
+
+        <!-- GRID -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <!-- CARD 1 -->
+          <div
+            onclick="
+              openModal(
+                'Cisco Networking',
+                'Pelatihan jaringan Cisco mencakup dasar routing, switching, dan troubleshooting jaringan.',
+                'assets/sertifcisco.jpg',
+              )
+            "
+            class="cursor-pointer group bg-white border border-gray-200 rounded-md overflow-hidden shadow-sm hover:shadow-md transition"
+          >
+            <div class="aspect-[4/3] overflow-hidden">
+              <img
+                src="assets/sertifcisco.jpg"
+                class="w-full h-full object-contain bg-white p-2"
+              />
+            </div>
+
+            <div class="p-3">
+              <p class="text-xs font-semibold uppercase">Cisco Networking</p>
+            </div>
+          </div>
+
+          <!-- CARD 2 -->
+          <div
+            onclick="
+              openModal(
+                'MSIB Data Analyst',
+                'Program pelatihan analisis data menggunakan SQL, Python, dan Tableau.',
+                'assets/sertifmsib.jpg',
+              )
+            "
+            class="cursor-pointer group bg-white border border-gray-200 rounded-md overflow-hidden shadow-sm hover:shadow-md transition"
+          >
+            <div class="aspect-[4/3] overflow-hidden">
+              <img
+                src="assets/sertifmsib.jpg"
+                class="w-full h-full object-contain bg-white p-2"
+              />
+            </div>
+
+            <div class="p-3">
+              <p class="text-xs font-semibold uppercase">MSIB Data Analyst</p>
+            </div>
+          </div>
+
+          <!-- CARD 3 -->
+          <div
+            onclick="
+              openModal(
+                'BNSP Professional',
+                'Sertifikasi kompetensi profesional yang diakui secara nasional di bidang terkait.',
+                'assets/sertifbnsp.jpg',
+              )
+            "
+            class="cursor-pointer group bg-white border border-gray-200 rounded-md overflow-hidden shadow-sm hover:shadow-md transition"
+          >
+            <div class="aspect-[4/3] overflow-hidden">
+              <img
+                src="assets/sertifbnsp.jpg"
+                class="w-full h-full object-contain bg-white p-2"
+              />
+            </div>
+
+            <div class="p-3">
+              <p class="text-xs font-semibold uppercase">BNSP Professional</p>
+            </div>
+          </div>
+
+          <!-- CARD 4 -->
+          <div
+            onclick="
+              openModal(
+                'FIKTI Certification',
+                'Sertifikat pelatihan dan pengembangan di bidang teknologi informasi.',
+                'assets/sertiffikti.jpg',
+              )
+            "
+            class="cursor-pointer group bg-white border border-gray-200 rounded-md overflow-hidden shadow-sm hover:shadow-md transition"
+          >
+            <div class="aspect-[4/3] overflow-hidden">
+              <img
+                src="assets/sertiffikti.jpg"
+                class="w-full h-full object-contain bg-white p-2"
+              />
+            </div>
+
+            <div class="p-3">
+              <p class="text-xs font-semibold uppercase">FIKTI Certification</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MODAL -->
+      <div
+        id="modal"
+        class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50 backdrop-blur-sm"
+      >
+        <div
+          class="bg-white max-w-lg w-full rounded-lg overflow-hidden relative animate-[fadeIn_.3s]"
+        >
+          <!-- CLOSE -->
+          <button
+            onclick="closeModal()"
+            class="absolute top-2 right-3 text-xl font-bold"
+          >
+            ✕
+          </button>
+
+          <!-- IMAGE -->
+          <img
+            id="modalImg"
+            class="w-full max-h-[70vh] object-contain bg-white p-2"
+          />
+
+          <!-- CONTENT -->
+          <div class="p-4">
+            <h3 id="modalTitle" class="font-bold text-lg mb-2"></h3>
+            <p id="modalDesc" class="text-sm text-gray-600"></p>
+          </div>
+        </div>
+      </div>
+
+      <section
+        aria-labelledby="keterampilan"
+        class="fade-in-section mb-16 text-center"
+      >
+        <h2
+          id="keterampilan"
+          class="text-2xl font-bold uppercase tracking-wide mb-10"
+        >
+          KETERAMPILAN
+        </h2>
+
+        <div
+          class="grid grid-cols-4 md:grid-cols-8 gap-6 justify-center items-center max-w-3xl mx-auto px-4"
+        >
+          <!-- Icon 1 -->
+          <div
+            class="w-16 h-16 bg-gray-100 rounded-full border border-gray-200 mx-auto overflow-hidden flex items-center justify-center"
+          >
+            <img
+              src="assets/icon1.png"
+              alt="Ikon keterampilan 1"
+              class="w-10 h-10 object-contain hover:scale-110 transition duration-300"
+            />
+          </div>
+
+          <!-- Icon 4 -->
+          <div
+            class="w-16 h-16 bg-gray-100 rounded-full border border-gray-200 mx-auto overflow-hidden flex items-center justify-center"
+          >
+            <img
+              src="assets/icon4.png"
+              alt="Ikon keterampilan 4"
+              class="w-10 h-10 object-contain hover:scale-110 transition duration-300"
+            />
+          </div>
+
+          <!-- Icon 5 -->
+          <div
+            class="w-16 h-16 bg-gray-100 rounded-full border border-gray-200 mx-auto overflow-hidden flex items-center justify-center"
+          >
+            <img
+              src="assets/icon5.png"
+              alt="Ikon keterampilan 5"
+              class="w-10 h-10 object-contain hover:scale-110 transition duration-300"
+            />
+          </div>
+
+          <!-- Icon 6 -->
+          <div
+            class="w-16 h-16 bg-gray-100 rounded-full border border-gray-200 mx-auto overflow-hidden flex items-center justify-center"
+          >
+            <img
+              src="assets/icon6.png"
+              alt="Ikon keterampilan 6"
+              class="w-10 h-10 object-contain hover:scale-110 transition duration-300"
+            />
+          </div>
+
+          <!-- Icon 7 -->
+          <div
+            class="w-16 h-16 bg-gray-100 rounded-full border border-gray-200 mx-auto overflow-hidden flex items-center justify-center"
+          >
+            <img
+              src="assets/icon7.png"
+              alt="Ikon keterampilan 7"
+              class="w-10 h-10 object-contain hover:scale-110 transition duration-300"
+            />
+          </div>
+
+          <!-- Icon 8 -->
+          <div
+            class="w-16 h-16 bg-gray-100 rounded-full border border-gray-200 mx-auto overflow-hidden flex items-center justify-center"
+          >
+            <img
+              src="assets/icon8.png"
+              alt="Ikon keterampilan 8"
+              class="w-10 h-10 object-contain hover:scale-110 transition duration-300"
+            />
+          </div>
+
+          <!-- Icon 9 -->
+          <div
+            class="w-16 h-16 bg-gray-100 rounded-full border border-gray-200 mx-auto overflow-hidden flex items-center justify-center"
+          >
+            <img
+              src="assets/icon9.png"
+              alt="Ikon keterampilan 9"
+              class="w-10 h-10 object-contain hover:scale-110 transition duration-300"
+            />
+          </div>
+
+          <!-- Icon 10 -->
+          <div
+            class="w-16 h-16 bg-gray-100 rounded-full border border-gray-200 mx-auto overflow-hidden flex items-center justify-center"
+          >
+            <img
+              src="assets/icon10.png"
+              alt="Ikon keterampilan 10"
+              class="w-10 h-10 object-contain hover:scale-110 transition duration-300"
+            />
+          </div>
+        </div>
+      </section>
+
+      <footer
+        id="kontak"
+        class="mt-20 py-10 border-t border-gray-100 text-center"
+      >
+        <h2
+          aria-labelledby="kontak"
+          class="text-2xl font-bold uppercase tracking-wide mb-6"
+        >
+          INFORMASI KONTAK
+        </h2>
+        <p class="text-sm text-gray-700 mb-10 max-w-md mx-auto">
+          Saya sangat menantikan untuk bekerja sama dengan Anda!
+        </p>
+
+        <div class="flex justify-center gap-x-12 max-w-lg mx-auto">
+          <!-- Gmail -->
+          <div class="flex flex-col items-center gap-y-2">
+            <div
+              class="w-10 h-10 bg-gray-200 rounded border border-gray-300 overflow-hidden flex items-center justify-center"
+            >
+              <img
+                src="assets/gmail.png"
+                alt="Ikon Gmail"
+                class="w-6 h-6 object-contain"
+              />
+            </div>
+            <a
+              href="mailto:muhammadpadli800@gmail.com"
+              class="text-xs text-gray-500 hover:text-blue-600 block no-underline"
+              >muhammadpadli800@gmail.com</a
+            >
+          </div>
+
+          <!-- WhatsApp -->
+          <div class="flex flex-col items-center gap-y-2">
+            <div
+              class="w-10 h-10 bg-gray-200 rounded border border-gray-300 overflow-hidden flex items-center justify-center"
+            >
+              <img
+                src="assets/wa.png"
+                alt="Ikon WhatsApp"
+                class="w-6 h-6 object-contain"
+              />
+            </div>
+            <a
+              href="tel:+6285156291704"
+              class="text-xs text-gray-500 hover:text-green-600 block no-underline"
+              >+62 851-5629-1704</a
+            >
+          </div>
+
+          <!-- LinkedIn -->
+          <div class="flex flex-col items-center gap-y-2">
+            <div
+              class="w-10 h-10 bg-gray-200 rounded border border-gray-300 overflow-hidden flex items-center justify-center"
+            >
+              <img
+                src="assets/linkedin.png"
+                alt="Ikon LinkedIn"
+                class="w-6 h-6 object-contain"
+              />
+            </div>
+            <a
+              href="https://linkedin.com/in/muhammad-padlii"
+              class="text-xs text-gray-500 hover:text-blue-600 block no-underline"
+              target="_blank"
+              rel="noopener"
+              >linkedin.com/in/muhammad-padlii</a
+            >
+          </div>
+        </div>
+      </footer>
+    </main>
+
+    <script>
+      function openModal(title, desc, img) {
+        const modal = document.getElementById("modal");
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+
+        document.getElementById("modalTitle").innerText = title;
+        document.getElementById("modalDesc").innerText = desc;
+        document.getElementById("modalImg").src = img;
+      }
+
+      function closeModal() {
+        const modal = document.getElementById("modal");
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+      }
+
+      // optional: klik luar untuk close
+      document.getElementById("modal").addEventListener("click", function (e) {
+        if (e.target === this) {
+          closeModal();
+        }
+      });
+      // Fade in observer
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate");
+          }
+        });
+      });
+      document
+        .querySelectorAll(".fade-in-section")
+        .forEach((el) => observer.observe(el));
+
+      // Proyek Slider JS
+      let currentSlide = 0;
+      const slides = 5;
+      const track = document.getElementById("projectTrack");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+      const dotsContainer = document.getElementById("projectDots");
+
+      // Create dots
+      for (let i = 0; i < slides; i++) {
+        const dot = document.createElement("span");
+        dot.classList.add("slider-dot");
+        dot.dataset.slide = i;
+        if (i === 0) dot.classList.add("active");
+        dot.addEventListener("click", () => goToSlide(i));
+        dotsContainer.appendChild(dot);
+      }
+
+      const dots = document.querySelectorAll(".slider-dot");
+
+      function updateSlider() {
+        track.style.transform = `translateX(-${currentSlide * 100}%)`;
+        dots.forEach((dot, index) => {
+          dot.classList.toggle("active", index === currentSlide);
+        });
+        prevBtn.disabled = currentSlide === 0;
+        nextBtn.disabled = currentSlide === slides - 1;
+      }
+
+      function goToSlide(slide) {
+        currentSlide = slide;
+        updateSlider();
+      }
+
+      prevBtn.addEventListener("click", () => {
+        if (currentSlide > 0) {
+          currentSlide--;
+          updateSlider();
+        }
+      });
+
+      nextBtn.addEventListener("click", () => {
+        if (currentSlide < slides - 1) {
+          currentSlide++;
+          updateSlider();
+        }
+      });
+
+      // Touch/swipe support
+      let startX = 0;
+      track.addEventListener(
+        "touchstart",
+        (e) => (startX = e.touches[0].clientX),
+      );
+      track.addEventListener("touchend", (e) => {
+        const endX = e.changedTouches[0].clientX;
+        if (startX - endX > 50) nextBtn.click();
+        if (endX - startX > 50) prevBtn.click();
+      });
+
+      // Keyboard
+      document.addEventListener("keydown", (e) => {
+        if (
+          document.activeElement === track ||
+          track.contains(document.activeElement)
+        ) {
+          if (e.key === "ArrowLeft") prevBtn.click();
+          if (e.key === "ArrowRight") nextBtn.click();
+        }
+      });
+    </script>
+  </body>
+</html>
